@@ -4,14 +4,14 @@ const imageKitClient = new ImageKit({
   privateKey: process.env.IMAGEKIT_PRIVATE_KEY,
 });
 
-async function uplaodFile(file) {
+async function uploadFile(file) {
   const result = await imageKitClient.files.upload({
     file,
-    fileName: "music_" + DataTransfer.now(),
+    fileName: "music_" + Date.now(),
     folder: "spotify/music",
   });
 
   return result;
 }
 
-module.exports = { uplaodFile };
+module.exports = { uploadFile };

@@ -1,7 +1,6 @@
 const musicModel = require("../models/music.model");
 const jwt = require("jsonwebtoken");
 const { uploadFile } = require("../services/storage.services");
-const { create } = require("../models/user.model");
 
 async function createMusic(req, res) {
   const token = req.cookies.token;
@@ -27,7 +26,7 @@ async function createMusic(req, res) {
   const result = await uploadFile(file.buffer.toString("base64"));
 
   const music = await musicModel.create({
-    uri: result.uri,
+    uri: result.url,
     title,
     artist: decoded.id,
   });
