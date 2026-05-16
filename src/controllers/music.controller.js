@@ -1,6 +1,6 @@
 const musicModel = require("../models/music.model");
 const jwt = require("jsonwebtoken");
-const { albumModel } = require("../models/album.model");
+const albumModel = require("../models/album.model");
 const { uploadFile } = require("../services/storage.services");
 const { compareSync } = require("bcryptjs");
 
@@ -61,11 +61,11 @@ async function createAlbum(req, res) {
         .json({ message: "you don't have access to create a music" });
     }
 
-    const { titel, musicIds } = req.body;
+    const { title, musics } = req.body;
     const album = await albumModel.create({
       title,
       artist: decoded.id,
-      musics: musicIds,
+      musics: musics,
     });
 
     res.status(201).json({
@@ -78,8 +78,9 @@ async function createAlbum(req, res) {
       },
     });
   } catch (error) {
-    return req.status(401).json({ message: "unauthorized" });
+    console.log(error);
+    return res.status(401).json({ message: "unauthorized" });
   }
 }
 
-module.exports = { createMusic };
+module.exports = { createMusic, createAlbum };
