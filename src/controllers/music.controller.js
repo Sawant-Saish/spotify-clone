@@ -55,4 +55,6 @@ async function getAllMusics(req, res) {
   });
 }
 
-module.exports = { createMusic, createAlbum, getAllMusics };
+async function getAllAlbums(req, res) {}
+
+module.exports = { createMusic, createAlbum, getAllMusics, getAllAlbums };
